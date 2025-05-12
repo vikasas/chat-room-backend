@@ -1,12 +1,14 @@
 import WebSocket, { WebSocketServer } from 'ws';
+import http from "http";
 
+const server = http.createServer();
 interface User {
   socket: WebSocket;
   room: string;
   name: string;
 }
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ server });
 const users: User[] = [];
 
 console.log('Server running on ws://localhost:8080');
@@ -57,3 +59,7 @@ wss.on('connection', (socket) => {
     }
   });
 });
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+})
