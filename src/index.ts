@@ -43,6 +43,7 @@ wss.on('connection', (socket) => {
               type: 'chat',
               payload: {
                 message: `${sender.name}: ${msg.payload.message}`,
+                sender : `${sender.name}`
               },
             })
           );
